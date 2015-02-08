@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
+
+	<ui:style>
+	.outer {
+		display: table;
+		height: 100%;
+		width: 100%;
+	}
+	
+	.mainPanel {
+		height: 100%;
+		width: 100%;
+		padding: 20px;
+		margin: 15px;
+	}
+	
+	.chatPanel {
+		padding: 20px;
+	}
+	
+	.southPanel {
+		width: 80%;
+		position: static;
+	}
+	
+	.userPanel {
+		margin: 20px;
+	}
+	
+	.inner {
+		background: #DDD;
+		display: table-cell;
+		vertical-align: middle;
+	}
+	
+	.aboutText {
+		width: 60%;
+		padding: 10px;
+		text-align: left;
+	}
+	</ui:style>
+	<g:DockLayoutPanel unit='EM' styleName="{style.mainPanel}">
+		<g:north size="6">
+			<g:HTML styleName="{style.aboutText}">
+				<div>
+					This is a simple chat built on top of 
+					Errai Message Bus and GwtBootstrap3.
+					Visit github to see source code.
+				</div>
+				<a href="https://www.linkedin.com/in/treblereel">
+					<i class="fa fa-linkedin fa-2x"></i>
+				</a>
+				<a href="https://github.com/treblereel">
+					<i class="fa fa-github fa-2x"></i>
+				</a>
+			</g:HTML>
+		</g:north>
+		<g:north size="1.4">
+			<g:FlowPanel>
+				<b:Label text="anonymous" type="PRIMARY" ui:field='usernameLabel' />
+			</g:FlowPanel>
+		</g:north>
+		<g:south size="5">
+			<g:FlowPanel styleName="{style.southPanel}">
+				<b:Label ui:field='messageTypeLabel' text="Broadcast message"
+					type="PRIMARY" />
+				<b:InputGroup>
+					<b:TextBox ui:field='messageField' placeholder="Type here"
+						autoComplete="false" maxLength="256" />
+					<b:InputGroupButton>
+						<b:Button ui:field='sendMessageButton' type="PRIMARY"
+							text="Send" />
+						<b:Button ui:field='cancelButton' text="Cancel" />
+						<b:Button ui:field='propertyButton' type="SUCCESS" text="Property"
+							icon="COG" iconPosition="RIGHT" />
+					</b:InputGroupButton>
+				</b:InputGroup>
+			</g:FlowPanel>
+		</g:south>
+		<g:east size="20">
+			<g:ScrollPanel styleName="{style.userPanel}">
+				<g:FlowPanel>
+					<b:ListGroup ui:field='usersList'>
+					</b:ListGroup>
+				</g:FlowPanel>
+			</g:ScrollPanel>
+		</g:east>
+		<g:center>
+			<g:ScrollPanel styleName="{style.chatPanel}">
+				<g:FlowPanel>
+					<b:ListGroup ui:field='chatList'>
+					</b:ListGroup>
+				</g:FlowPanel>
+			</g:ScrollPanel>
+		</g:center>
+	</g:DockLayoutPanel>
+</ui:UiBinder>

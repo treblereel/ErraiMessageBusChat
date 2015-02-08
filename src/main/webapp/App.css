@@ -1,0 +1,44 @@
+body {
+	background-color: #ffffff;
+	color: black;
+	font-family: Arial, sans-serif;
+	font-size: small;
+	margin: 8px;
+}
+
+li {
+	-ms-word-break: break-all;
+	word-break: break-all;
+	/* Non standard for webkit */
+	word-break: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	hyphens: auto;
+}
+
+.list-group-item-primary {
+	color: #fff;
+	background-color: #428bca !important;
+	border-color: #357ebd;
+}
+
+a.list-group-item-primary {
+	color: #357ebd
+}
+
+a.list-group-item-primary .list-group-item-heading {
+	color: inherit
+}
+
+a.list-group-item-primary:focus, a.list-group-item-primary:hover {
+	color: #357ebd;
+	background-color: #faf2cc
+}
+
+a.list-group-item-primary.active, a.list-group-item-primary.active:focus,
+	a.list-group-item-primary.active:hover {
+	color: #fff;
+	background-color: #357ebd;
+	border-color: #357ebd
+}
