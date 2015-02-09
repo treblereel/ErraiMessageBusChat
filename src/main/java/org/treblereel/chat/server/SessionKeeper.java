@@ -20,10 +20,10 @@ public class SessionKeeper {
     sessions.putIfAbsent(sessionId, new User(username, "SUCCESS"));
   }
 
-  public String getUsernameBySessionId(String sessionId){
+  public User getUserBySessionId(String sessionId){
 	  if(sessions.containsKey(sessionId))
-		return sessions.get(sessionId).getUsername();
-	  return "";
+		return sessions.get(sessionId);
+	  return null;
 	}
 
   public String getSessionIdByUsername(String username) {

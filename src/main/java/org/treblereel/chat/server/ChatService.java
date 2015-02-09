@@ -94,12 +94,10 @@ public class ChatService implements MessageCallback {
     msgBus.addUnsubscribeListener(new UnsubscribeListener() {
       @Override
       public void onUnsubscribe(SubscriptionEvent event) {
-        logger.info("onUnsubscribe  " + event.getSessionId() + " "
-            + sessionKeeper.getUsernameBySessionId(event.getSessionId()));
         String username = "unknown";
         if (event.getSessionId() != null)
-          if (sessionKeeper.getUsernameBySessionId(event.getSessionId()) != null) {
-            username = sessionKeeper.getUsernameBySessionId(event.getSessionId());
+          if (sessionKeeper.getUserBySessionId(event.getSessionId()) != null) {
+            username = sessionKeeper.getUserBySessionId(event.getSessionId()).getUsername();
             if (!username.isEmpty()) {
               sendSystemMessage(username + " has left the channel");
             }
@@ -120,7 +118,7 @@ public class ChatService implements MessageCallback {
         logger.info("ChangeUsernameSubject " + message.get(String.class, "username"));
         QueueSession sess = message.getResource(QueueSession.class, Resources.Session.name());
 
-        String oldname = sessionKeeper.getUsernameBySessionId(sess.getSessionId());
+        String oldname = sessionKeeper.getUserBySessionId(sess.getSessionId()).getUsername();
         String username = message.get(String.class, "username");
 
         String color = message.get(String.class, "color");
@@ -154,9 +152,19 @@ public class ChatService implements MessageCallback {
 
   private void sendPrivateMessage(MyMessage chatMessage) {
     String recipientSessionId = sessionKeeper.getSessionIdByUsername(chatMessage.getRecipient());
+    chatMessage.setMessage(" to "+  chatMessage.getRecipient()  + " : " + chatMessage.getMessage());
     MessageBuilder.createMessage().toSubject("ChatClient").signalling()
         .with(MessageParts.SessionID, recipientSessionId).with("message", chatMessage)
         .noErrorHandling().sendNowWith(msgBus);
+    
+    /* We would like to info the user that their private message is *delivered*, actually, we should check
+    /* that a recipient receives that massage, but it's just an example, isn't it?
+    */
+    
+    String authorSessionId = sessionKeeper.getSessionIdByUsername(chatMessage.getAuthor().getUsername());
+    MessageBuilder.createMessage().toSubject("ChatClient").signalling()
+    .with(MessageParts.SessionID, authorSessionId).with("message", chatMessage)
+    .noErrorHandling().sendNowWith(msgBus);
     logger.info("sendPrivateMessage done");
   }
 

@@ -17,7 +17,6 @@ import org.gwtbootstrap3.client.ui.constants.IconSize;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.constants.LabelType;
 import org.jboss.errai.bus.client.ErraiBus;
-import org.jboss.errai.bus.client.api.Local;
 import org.jboss.errai.bus.client.api.base.MessageBuilder;
 import org.jboss.errai.bus.client.api.messaging.Message;
 import org.jboss.errai.bus.client.api.messaging.MessageCallback;
@@ -169,7 +168,7 @@ public class ChatClient extends Composite {
     message.insert(icon, 0);
     message.setId("message_" + random.nextInt());
     message.setText(" " + DateTimeFormat.getFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + " "
-        + newMessage.getAuthor().getUsername() + " say : " + newMessage.getMessage());
+        + newMessage.getAuthor().getUsername() + " says : " + newMessage.getMessage());
     message.getElement().addClassName(
         "list-group-item-" + newMessage.getAuthor().getColor().toLowerCase());
     chatList.add(message);
