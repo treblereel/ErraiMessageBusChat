@@ -31,7 +31,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<errai.version>3.1.1-SNAPSHOT</errai.version>
+		<errai.version>3.2.1.Final</errai.version>
 		<gwt.version>2.7.0</gwt.version>
 		<slf4j.version>1.7.2</slf4j.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -95,7 +95,7 @@
 		<dependency>
 			<groupId>org.gwtbootstrap3</groupId>
 			<artifactId>gwtbootstrap3</artifactId>
-			<version>0.9-SNAPSHOT</version>
+			<version>0.9.1</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -112,6 +112,14 @@
 		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>1.0.2.Final</version>
+				<configuration>
+					<detail>true</detail>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
